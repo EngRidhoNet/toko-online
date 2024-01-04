@@ -1,5 +1,5 @@
 <?php 
-    // require "session.php";
+    require "session.php";
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +10,6 @@
     <title>Home</title>
 </head>
 <body>
-    <h2>Halo Admin</h2>
+    <h2>Halo <?php echo $_SESSION['username']; ?></h2>
 </body>
 </html>

@@ -84,9 +84,9 @@ require '../koneksi.php';
                 $data = mysqli_fetch_array($query);
                 if ($cek > 0) {
                     if (password_verify($password, $data['password'])) {
-                        $_SESSION['$username'] = $data['$username'];
+                        $_SESSION['username'] = $data['username'];
                         $_SESSION['login'] = true;
-                        header("location:index.php");
+                        header("location:../adminpanel/");
                     }
                 } else{
             ?>
