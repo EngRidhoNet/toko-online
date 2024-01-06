@@ -19,6 +19,7 @@ require "session.php";
 
     .summary-kategori {
         background-color: #0a6b4a;
+        border-radius: 15px;
     }
 </style>
 
@@ -37,14 +38,17 @@ require "session.php";
         </nav>
         <h2>Halo <?php echo $_SESSION['username']; ?></h2>
 
-        <div class="container mt-5 summary-kategori p-3">
+        <div class="container mt-5">
             <div class="row">
-                <div class="col-lg-4 kotak">
+                <div class="col-lg-4 summary-kategori p-4">
                     <div class="row">
                         <div class="col-6">
                             <i class="fa-solid fa-align-justify fa-5x"></i>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-6 text-white">
+                            <h3 class="fs-2">Kategori</h3>
+                            <p class="fs-4">Kategori</p>
+                            <p><a href="kategori.php" class="text-white">Lihat Detail</a></p>
                            
                         </div>
                     </div>
