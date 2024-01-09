@@ -50,12 +50,53 @@ $jumlahKategori = mysqli_num_rows($queryKategori);
             </ol>
         </nav>
 
+        <!-- form kategori -->
+        <div class="container mt-5" style="text-align: justify;">
+            <div class="card card-custom mb-3" style="border-radius: 20px;">
+                <div class="card-body">
+                    <div class="my-5 ">
+                        <h3>Tambah Kategori</h3>
+                        <form method="POST" class="justify-content-center">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="kategori" class="form-label justify-content-center">Nama Kategori</label>
+                                        <input type="text" class="form-control justify-content-center" id="kategori" name="kategori" placeholder="Masukkan nama kategori" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="simpan_kategori">Tambah</button>
+                        </form>
+                        <?php
+                        if (isset($_POST['simpan_kategori'])) {
+                            $kategori = htmlspecialchars($_POST['kategori']);
+                            // mengecek data kategori sudah ada atau belum
+                            $query = mysqli_query($conn, "SELECT * FROM kategori WHERE nama = '$kategori'");
+                            $cek = mysqli_num_rows($query);
+                            if ($cek > 0) {
+                                echo '<div class="alert alert-danger mt-3" role="alert">Kategori sudah ada!</div>';
+                                echo '<meta http-equiv="refresh" content="2;url=kategori.php">';
+                                die;
+                            } else{
+                                $query = mysqli_query($conn, "INSERT INTO kategori VALUES (NULL, '$kategori')");
+                                $success_message = $query ? 'Berhasil menambahkan kategori!' : 'Gagal menambahkan kategori!';
+                                $alert_class = $query ? 'alert-success' : 'alert-danger';
+                                echo '<div class="alert ' . $alert_class . ' mt-3" role="alert">' . $success_message . '</div>';
+                                echo '<meta http-equiv="refresh" content="2;url=kategori.php">';
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end form kategori -->
         <div class="container mt-5">
             <div class="card card-custom mb-3" style="border-radius: 20px;">
                 <div class="card-body">
                     <div class="mt-3">
                         <h2>List Kategori</h2>
-            
+
                         <div class="table-responsive mt-5">
                             <table id="kategoriTable" class="table">
                                 <thead>
