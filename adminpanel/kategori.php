@@ -74,7 +74,7 @@ $jumlahKategori = mysqli_num_rows($queryKategori);
                             $query = mysqli_query($conn, "SELECT * FROM kategori WHERE nama = '$kategori'");
                             $cek = mysqli_num_rows($query);
                             if ($cek > 0) {
-                                echo '<div class="alert alert-danger mt-3" role="alert">Kategori sudah ada!</div>';
+                                echo '<div class="alert alert-warning mt-3" role="alert">Kategori sudah ada!</div>';
                                 echo '<meta http-equiv="refresh" content="2;url=kategori.php">';
                                 die;
                             } else{
@@ -103,6 +103,7 @@ $jumlahKategori = mysqli_num_rows($queryKategori);
                                     <tr>
                                         <th>No.</th>
                                         <th>Nama Kategori</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -112,6 +113,10 @@ $jumlahKategori = mysqli_num_rows($queryKategori);
                                         echo '<tr>
                                                 <td>' . $number . '</td>
                                                 <td>' . $data['nama'] . '</td>
+                                                <td>
+                                                    <a href="kategori-detail.php?id=' . $data['id'] . '" class="btn btn-info btn-sm"><i class = "fas fa-search"></i></a>
+                                                    <a href="edit_kategori.php?id=' . $data['id'] . '" class="btn btn-warning btn-sm">Edit</a>
+                                                    <a href="hapus_kategori.php?id=' . $data['id'] . '" class="btn btn-danger btn-sm">Hapus</a>
                                               </tr>';
                                         $number++;
                                     }
