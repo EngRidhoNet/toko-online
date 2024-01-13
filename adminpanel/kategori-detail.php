@@ -19,52 +19,59 @@ $dataKategori = mysqli_fetch_assoc($queryKategori);
 
 <body>
     <?php require "navbar.php" ?>
+    <div class="container mt-5" style="text-align: justify;">
+        <div class="card card-custom mb-3" style="border-radius: 20px;">
+            <div class="card-body">
+                <div class="container mt-5">
+                    <h2>Detail Kategori</h2>
 
-    <div class="container mt-5">
-        <h2>Detail Kategori</h2>
+                    <div class="col-12 col-md-6">
+                        <form action="" method="post">
+                            <div>
+                                <label for="kategori">Kategori</label>
+                                <input type="text" name="kategori" id="kategori" value="<?php echo $dataKategori['nama'] ?>" class="form-control">
+                            </div>
 
-        <div class="col-12 col-md-6">
-            <form action="" method="post">
-                <div>
-                    <label for="kategori">Kategori</label>
-                    <input type="text" name="kategori" id="kategori" value="<?php echo $dataKategori['nama'] ?>" class="form-control">
-                </div>
+                            <div class="mt-5 d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary" name="editBtn">Edit</button>
+                                <button type="submit" class="btn btn-danger" name="deleteBtn">Delete</button>
+                            </div>
+                        </form>
 
-                <div class="mt-5">
-                    <button type="submit" class="btn btn-primary" name="editBtn">Edit</button>
-                </div>
-            </form>
+                        <?php
+                        if (isset($_POST['editBtn'])) {
+                            $kategori = htmlspecialchars($_POST['kategori']);
+                            if ($dataKategori['nama'] == $kategori) {
+                                echo '<div class="alert alert-warning" role="alert">Tidak ada perubahan</div>';
+                            } else {
+                                $query = mysqli_query($conn, "SELECT * FROM kategori WHERE nama = '$kategori'");
+                                $cek = mysqli_num_rows($query);
 
-            <?php
-            if (isset($_POST['editBtn'])) {
-                $kategori = htmlspecialchars($_POST['kategori']);
-
-                $queryEdit = mysqli_query($conn, "UPDATE kategori SET nama = '$kategori' WHERE id = '$id'");
-
-                if ($dataKategori['nama'] == $kategori) {
-                    echo '<div class="alert alert-warning" role="alert">Tidak ada perubahan</div>';
-                } else {
-                    $query = mysqli_query($conn, "SELECT * FROM kategori WHERE nama = '$kategori'");
-                    $cek = mysqli_num_rows($query);
-                    
-                    if ($cek > 0) {
-                        echo '<div class="alert alert-danger" role="alert">Kategori sudah ada</div>';
-                    } else {
-                        if ($queryEdit) {
-                            $query = mysqli_query($conn, "INSERT INTO kategori VALUES (NULL, '$kategori')");
-                            $success_message = $query ? 'Berhasil menambahkan kategori!' : 'Gagal menambahkan kategori!';
-                            $alert_class = $query ? 'alert-success' : 'alert-danger';
-                            echo '<div class="alert ' . $alert_class . ' mt-3" role="alert">' . $success_message . '</div>';
-                            echo '<meta http-equiv="refresh" content="2;url=kategori.php">';
-                        } else {
-                            echo '<div class="alert alert-danger" role="alert">Gagal edit kategori</div>';
+                                if ($cek > 0) {
+                                    echo '<div class="alert alert-danger" role="alert">Kategori sudah ada</div>';
+                                } else {
+                                    $query = mysqli_query($conn, "update kategori set nama = '$kategori' where id = '$id'");
+                                    $success_message = $query ? 'Berhasil mengedit kategori!' : 'Gagal menambahkan kategori!';
+                                    $alert_class = $query ? 'alert-success' : 'alert-danger';
+                                    echo '<div class="alert ' . $alert_class . ' mt-3" role="alert">' . $success_message . '</div>';
+                                    echo '<meta http-equiv="refresh" content="2;url=kategori.php">';
+                                } 
+                            } 
                         }
-                    }
-                }
-            }
-            ?>
-        </div>
 
+                        if (isset($_POST['deleteBtn'])) {
+                            $queeyDelete = mysqli_query($conn, "DELETE FROM kategori where id = '$id'");
+
+                            if ($queeyDelete) {
+                                echo '<div class="alert alert-success mt-3" role="alert">Berhasil menghapus kategori!</div>';
+                                echo '<meta http-equiv="refresh" content="2;url=kategori.php">';
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
