@@ -115,8 +115,8 @@ $jumlahKategori = mysqli_num_rows($queryKategori);
                                                 <td>' . $data['nama'] . '</td>
                                                 <td>
                                                     <a href="kategori-detail.php?id=' . $data['id'] . '" class="btn btn-info btn-sm"><i class = "fas fa-search"></i></a>
-                                                    <a href="edit_kategori.php?id=' . $data['id'] . '" class="btn btn-warning btn-sm">Edit</a>
-                                                    <a href="hapus_kategori.php?id=' . $data['id'] . '" class="btn btn-danger btn-sm">Hapus</a>
+                                                    <a href="kategori-detail.php?id=' . $data['id'] . '" class="btn btn-warning btn-sm">Edit</a>
+                                                    <a href="kategori-detail.php?id=' . $data['id'] . '" class="btn btn-danger btn-sm">Hapus</a>
                                               </tr>';
                                         $number++;
                                     }
